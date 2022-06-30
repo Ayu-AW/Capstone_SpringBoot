@@ -24,7 +24,19 @@ public class Category {
     @Column(name="categoryName", length = 100, nullable = false, unique = true)
     private String categoryName;
 
-    @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL )
-    private Set<Book> books = new HashSet<Book>();
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
+   // @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL )
+
+    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+    private Set<Book> books = new HashSet<Book>();
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                '}';
+    }
 }

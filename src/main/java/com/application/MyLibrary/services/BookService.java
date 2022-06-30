@@ -16,6 +16,7 @@ public class BookService {
     public List<Book> findAllBooks(){
         return bookRepository.findAll();
     }
+
     // Returns a specific book fetched by a given id
     public Book findBookId(Long id){
         //Find the book by id
@@ -27,7 +28,13 @@ public class BookService {
     public void createBook(Book book) {
         bookRepository.save(book);
     }
-    // Deletes a specific a book by id
+
+    // updates a book
+    public void updateBook(Book book) {
+        bookRepository.save(book);
+    }
+
+    // Deletes a specific book by id
     public void deleteBook(Long id) {
         //Find the book by id
         Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found!"));

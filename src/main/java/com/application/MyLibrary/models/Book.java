@@ -1,5 +1,6 @@
 package com.application.MyLibrary.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,11 +11,11 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "books")
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name="ISBN", length = 50, nullable = false,unique = true)
@@ -43,6 +44,12 @@ public class Book {
             joinColumns = {@JoinColumn(name="book_id")},
             inverseJoinColumns = {@JoinColumn(name  = "publisher_id" )})
     private Set<Publisher> publishers = new HashSet<Publisher>();
+
+    public Book(String isbn, String bookName, String description) {
+        this.isbn = isbn;
+        this.bookName = bookName;
+        this.description = description;
+    }
 
     // method to remove bidirectionally
     public void removePublisher(Publisher publisher) {
@@ -75,5 +82,15 @@ public class Book {
     public void addCategory(Category category) {
         this.categories.add(category);
         category.getBooks().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

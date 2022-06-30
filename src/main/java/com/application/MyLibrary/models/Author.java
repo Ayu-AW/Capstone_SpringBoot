@@ -29,7 +29,20 @@ public class Author {
     @Column(name="description", length = 250, nullable = false)
     private String description;
 
+    public Author(String authorName, String description) {
+        this.authorName = authorName;
+        this.description = description;
+    }
+
     @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<Book>();
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", authorName='" + authorName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
