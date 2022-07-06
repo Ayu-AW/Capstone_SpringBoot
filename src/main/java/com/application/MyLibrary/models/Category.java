@@ -28,9 +28,7 @@ public class Category {
         this.name = name;
     }
 
-   // @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL )
-
-    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+   @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL )
     private Set<Book> books = new HashSet<Book>();
 
 }

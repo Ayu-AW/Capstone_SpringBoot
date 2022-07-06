@@ -1,16 +1,17 @@
 package com.application.MyLibrary;
 
-import com.application.MyLibrary.controllers.UsersController;
+
 import com.application.MyLibrary.models.*;
 import com.application.MyLibrary.services.BookService;
-import com.application.MyLibrary.services.UsersService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+@SpringBootApplication (exclude={SecurityAutoConfiguration.class})
 public class MyLibraryApplication {
 
 	public static void main(String[] args) {
