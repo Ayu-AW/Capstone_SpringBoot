@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,18 +13,21 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "books")
 public class Book {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="ISBN", length = 50, nullable = false,unique = true)
+
+    @Column(name="isbn", length = 50, nullable = false,unique = true)
     private String isbn;
 
-    @Column(name="bookName", length = 100, nullable = false)
-    private String bookName;
+
+    @Column(name="name", length = 100, nullable = false)
+    private String name;
+
 
     @Column(name="description", length = 250, nullable = false)
     private String description;
@@ -45,9 +50,10 @@ public class Book {
             inverseJoinColumns = {@JoinColumn(name  = "publisher_id" )})
     private Set<Publisher> publishers = new HashSet<Publisher>();
 
-    public Book(String isbn, String bookName, String description) {
+    // Constructor
+    public Book(String isbn, String name, String description) {
         this.isbn = isbn;
-        this.bookName = bookName;
+        this.name = name;
         this.description = description;
     }
 
@@ -84,13 +90,5 @@ public class Book {
         category.getBooks().add(this);
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", isbn='" + isbn + '\'' +
-                ", bookName='" + bookName + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
+
 }

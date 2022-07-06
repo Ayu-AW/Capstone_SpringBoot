@@ -22,21 +22,15 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="publisherName", length = 100, nullable = false, unique = true)
-    private String publisherName;
+    @Column(name="name", length = 100, nullable = false, unique = true)
+    private String name;
 
-    public Publisher(String publisherName) {
-        this.publisherName = publisherName;
+    public Publisher(String name) {
+        this.name = name;
     }
 
     @ManyToMany(mappedBy = "publishers", cascade = CascadeType.ALL )
     private Set<Book> books = new HashSet<Book>();
 
-    @Override
-    public String toString() {
-        return "Publisher{" +
-                "id=" + id +
-                ", publisherName='" + publisherName + '\'' +
-                '}';
-    }
+
 }

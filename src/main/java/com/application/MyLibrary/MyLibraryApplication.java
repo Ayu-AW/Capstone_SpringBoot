@@ -1,10 +1,9 @@
 package com.application.MyLibrary;
 
-import com.application.MyLibrary.models.Author;
-import com.application.MyLibrary.models.Book;
-import com.application.MyLibrary.models.Category;
-import com.application.MyLibrary.models.Publisher;
+import com.application.MyLibrary.controllers.UsersController;
+import com.application.MyLibrary.models.*;
 import com.application.MyLibrary.services.BookService;
+import com.application.MyLibrary.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +19,7 @@ public class MyLibraryApplication {
 
 	@Autowired
 	BookService bookService;
+
 	@Bean
 	public CommandLineRunner initialCreate( ) {
 		return(args) ->{
@@ -27,6 +27,7 @@ public class MyLibraryApplication {
 			Author au01 = new Author("AuthorName1", "Author description1");
 			Category cat01 = new Category("Systems Book");
 			Publisher pub01 = new Publisher("Pub incorporated");
+
 			b01.addAuthor(au01);
 			b01.addCategory(cat01);
 			b01.addPublisher(pub01);
