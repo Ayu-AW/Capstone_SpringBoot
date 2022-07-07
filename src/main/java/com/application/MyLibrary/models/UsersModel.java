@@ -3,7 +3,9 @@ package com.application.MyLibrary.models;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -72,6 +74,9 @@ public class UsersModel {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    @ManyToMany(mappedBy = "users_table", cascade = CascadeType.ALL)
+    private Set<Book> books = new HashSet<Book>();
 }
 
 

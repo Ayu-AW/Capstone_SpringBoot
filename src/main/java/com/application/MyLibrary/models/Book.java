@@ -32,23 +32,33 @@ public class Book {
     @Column(name="description", length = 250, nullable = false)
     private String description;
 
-    @ManyToMany(cascade = {CascadeType.ALL}) //Whatever CURD operation we do in books will be directly be applied in authors
+    //Whatever CURD operation we do in books will  directly be applied in authors
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "books_authors",
         joinColumns = {@JoinColumn(name="book_id")},
         inverseJoinColumns = {@JoinColumn(name  = "author_id" )})
     private Set<Author> authors = new HashSet<Author>();
 
-    @ManyToMany(cascade = {CascadeType.ALL}) //Whatever CURD operation we do in books will be directly be applied in authors
+    //Whatever CURD operation we do in books will  directly be applied in categories
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "books_categories",
             joinColumns = {@JoinColumn(name="book_id")},
             inverseJoinColumns = {@JoinColumn(name  = "category_id" )})
     private Set<Category> categories = new HashSet<Category>();
 
-    @ManyToMany(cascade = {CascadeType.ALL}) //Whatever CURD operation we do in books will be directly be done in authors
+    //Whatever CURD operation we do in books will  directly be done in publishers
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "books_publishers",
             joinColumns = {@JoinColumn(name="book_id")},
             inverseJoinColumns = {@JoinColumn(name  = "publisher_id" )})
     private Set<Publisher> publishers = new HashSet<Publisher>();
+
+    //Whatever CURD operation we do in books will  directly be applied in users
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+    @JoinTable(name = "books_users",
+            joinColumns = {@JoinColumn(name="book_id")},
+            inverseJoinColumns = {@JoinColumn(name  = "user_id" )})
+    private Set<UsersModel> users_table = new HashSet<UsersModel>();
 
     // Constructor
     public Book(String isbn, String name, String description) {
